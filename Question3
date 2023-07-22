@@ -1,0 +1,29 @@
+import java.util.HashMap;
+
+public class CountSingularSocks {
+
+    public static int countSingularSocks(int[] arrNum) {
+        HashMap<Integer, Integer> sockOccurrences = new HashMap<>();
+
+        // Count the occurrences of each sock ID
+        for (int num : arrNum) {
+            sockOccurrences.put(num, sockOccurrences.getOrDefault(num, 0) + 1);
+        }
+
+        int countSingular = 0;
+        // Count the number of singular socks
+        for (int count : sockOccurrences.values()) {
+            if (count == 1) {
+                countSingular++;
+            }
+        }
+
+        return countSingular;
+    }
+
+    public static void main(String[] args) {
+        int[] arrNum = {10, 20, 20, 10, 10, 30, 50, 10, 20};
+        int singularSocksCount = countSingularSocks(arrNum);
+        System.out.println("Count of singular socks = " + singularSocksCount);
+    }
+}
