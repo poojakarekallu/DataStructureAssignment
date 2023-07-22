@@ -1,0 +1,63 @@
+class ListNode {
+    int val;
+    ListNode next;
+
+    ListNode(int val) {
+        this.val = val;
+        this.next = null;
+    }
+}
+
+public class RemoveDuplicatesFromLinkedList {
+    public static ListNode removeDuplicates(ListNode head) {
+        if (head == null) {
+            return null;
+        }
+
+        ListNode current = head;
+
+        while (current != null) {
+            ListNode runner = current;
+
+            while (runner.next != null) {
+                if (runner.next.val == current.val) {
+                    runner.next = runner.next.next;
+                } else {
+                    runner = runner.next;
+                }
+            }
+
+            current = current.next;
+        }
+
+        return head;
+    }
+
+    public static void printLinkedList(ListNode head) {
+        ListNode current = head;
+        while (current != null) {
+            System.out.print(current.val + " -> ");
+            current = current.next;
+        }
+        System.out.println("null");
+    }
+
+    public static void main(String[] args) {
+        // Create a linked list with duplicates
+        ListNode head = new ListNode(1);
+        head.next = new ListNode(2);
+        head.next.next = new ListNode(2);
+        head.next.next.next = new ListNode(3);
+        head.next.next.next.next = new ListNode(4);
+        head.next.next.next.next.next = new ListNode(4);
+        head.next.next.next.next.next.next = new ListNode(5);
+
+        System.out.println("Original Linked List:");
+        printLinkedList(head);
+
+        ListNode uniqueList = removeDuplicates(head);
+
+        System.out.println("Linked List after removing duplicates:");
+        printLinkedList(uniqueList);
+    }
+}
